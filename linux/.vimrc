@@ -12,3 +12,6 @@ set ttymouse=xterm2
 set expandtab                                                                    
 set tabstop=4                                                                    
 set shiftwidth=4
+
+"show tree style by default
+let g:netrw_liststyle=3
