@@ -18,3 +18,7 @@ set hlsearch
 
 "show tree style by default
 let g:netrw_liststyle=3
+
+"enable syntax coloring
+syntax on
+colorscheme desert
