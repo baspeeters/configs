@@ -1,0 +1,228 @@
+;; -*- mode: elisp -*-
+
+;;
+;; VISUAL
+;;
+;;
+
+;; Disable the splash screen (to enable it agin, replace the t with 0)
+(setq inhibit-splash-screen t)
+
+;; Enable transient mark mode
+(transient-mark-mode 1)
+
+;; Disable menu bar and scroll bar
+(menu-bar-mode -1)
+(toggle-scroll-bar -1)
+(tool-bar-mode -1) 
+
+;; Enable text wrapping
+(add-hook 'org-mode-hook #'toggle-word-wrap)
+
+;; Ace window
+;(global-set-key (kbd "M-o") 'ace-window)
+
+;; Evaluate code + display inline images
+(add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
+
+;; Themes
+;(add-to-list 'load-path "~/.emacs.d/themes/")
+;(load "assemblage-theme")
+;(load "billw-theme")
+
+
+
+;;
+;; Programming
+;;
+;;
+
+;; 
+
+; Auto-complete
+;(ac-config-default)
+(global-set-key (kbd "C-SPC") 'auto-complete)
+
+; Go to line
+(global-set-key (kbd "C-g") 'goto-line)
+
+; PHPUnit
+;(define-key web-mode-map (kbd "C-t t") 'phpunit-current-test)
+;(define-key web-mode-map (kbd "C-t c") 'phpunit-current-class)
+;(define-key web-mode-map (kbd "C-t p") 'phpunit-current-project)
+
+
+
+;;
+;; MODES
+;;
+;;
+
+;;;;;;Org mode configuration
+
+;; Enable Org mode
+(require 'org)
+;; Make Org mode work with files ending in .org
+;; (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+;; The above is the default in recent emacsen
+
+
+;;;;;; Agenda
+(global-set-key "\C-ca" 'org-agenda)
+
+
+;;;;;; Ditaa
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((ditaa . t))) ; this line activates ditaa
+
+;;;;;; PlantUML
+;;(org-babel-do-load-languages
+;; ‘org-babel-load-languages
+;;  ‘((plantuml . t)))
+(with-eval-after-load 'org
+(org-babel-do-load-languages 'org-babel-load-languages '((ruby . t)
+(plantuml . t)
+)))
+(setq org-plantuml-jar-path (expand-file-name "/var/lib/gems/2.5.0/gems/asciidoctor-diagram-2.0.1/lib/plantuml.jar"))
+
+
+;;;;;; Git
+;(require 'git-commit)
+(add-hook 'git-commit-mode-hook 'turn-on-flyspell)
+(add-hook 'git-commit-mode-hook (lambda () (toggle-save-place 0)))
+
+(add-to-list 'auto-mode-alist '("/COMMIT_EDITMSG\\'" . diff-mode))
+
+
+;;;;;; Asana
+;(add-to-list 'load-path "~/.emacs.d/asana")
+;(load "asana.el")
+;;; (global-asana-mode 1)
+;;; or, if you prefer, use it in specific major modes:
+;(add-hook 'org-mode-hook 'asana-mode)
+;;; (add-hook 'prog-mode-hook 'asana-mode)
+;;; (add-hook 'text-mode-hook 'asana-mode)
+;;;(setq asana-keymap-prefix "C-c C-a")
+
+
+
+
+;;
+;; EXPORTING
+;;
+;;
+
+;; Markdown
+(require 'ox-md)
+
+
+
+
+
+;;
+;; MELPA
+;;
+(require 'package)
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (proto (if no-ssl "http" "https")))
+  (when no-ssl
+    (warn "\
+Your version of Emacs does not support SSL connections,
+which is unsafe because it allows man-in-the-middle attacks.
+There are two things you can do about this warning:
+1. Install an Emacs version that does support SSL and be safe.
+2. Remove this warning from your init file so you won't see it again."))
+  ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
+  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+  ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+  (when (< emacs-major-version 24)
+    ;; For important compatibility libraries like cl-lib
+    (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
+(package-initialize)
+
+
+;;
+;; ACTIONS
+;;
+;;
+
+(defun my-org-screenshot ()
+  "Take a screenshot into a time stamped unique-named file in the
+same directory as the org-buffer and insert a link to this file."
+  (interactive)
+  (setq filename
+        (concat
+         (make-temp-name
+          (concat (buffer-file-name)
+                  "_"
+                  (format-time-string "%Y%m%d_%H%M%S_")) ) ".png"))
+  (call-process "feh" nil nil nil filename)
+  (insert (concat "[[" filename "]]"))
+  (org-display-inline-images))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ace-window-display-mode t)
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(ansi-color-names-vector
+   ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
+ '(ansi-term-color-vector
+   [unspecified "#383838" "#dca3a3" "#5f7f5f" "#e0cf9f" "#7cb8bb" "#dc8cc3" "#7cb8bb" "#dcdccc"])
+ '(custom-enabled-themes (quote (billw)))
+ '(custom-safe-themes
+   (quote
+    ("85e6bb2425cbfeed2f2b367246ad11a62fb0f6d525c157038a0d0eaaabc1bfee" "8c1dd3d6fdfb2bee6b8f05d13d167f200befe1712d0abfdc47bb6d3b706c3434" "50b64810ed1c36dfb72d74a61ae08e5869edc554102f20e078b21f84209c08d1" "f6f5d5adce1f9a764855c9730e4c3ef3f90357313c1cae29e7c191ba1026bc15" "60e09d2e58343186a59d9ed52a9b13d822a174b33f20bdc1d4abb86e6b17f45b" "cea3ec09c821b7eaf235882e6555c3ffa2fd23de92459751e18f26ad035d2142" "a85e40c7d2df4a5e993742929dfd903899b66a667547f740872797198778d7b5" "23ba4b4ba4d1c989784475fed58919225db8d9a9751b32aa8df835134fe7ba6f" "fede08d0f23fc0612a8354e0cf800c9ecae47ec8f32c5f29da841fe090dfc450" "bc4c89a7b91cfbd3e28b2a8e9e6750079a985237b960384f158515d32c7f0490" "99c86852decaeb0c6f51ce8bd46e4906a4f28ab4c5b201bdc3fdf85b24f88518" "dc594e589d7927c234c35de25a355203ab702008494cbd5213a9f17458411d85" "90922c51f18ec54f8654d1670b2753a5da7d92fc49c79007b5d4a5cb4afa5200" "3be1f5387122b935a26e02795196bc90860c57a62940f768f138b02383d9a257" "44961a9303c92926740fc4121829c32abca38ba3a91897a4eab2aa3b7634bed4" "34ed3e2fa4a1cb2ce7400c7f1a6c8f12931d8021435bad841fdc1192bd1cc7da" "1f38fb71e55e5ec5f14a39d03ca7d7a416123d3f0847745c7bade053ca58f043" "f66abed5139c808607639e5a5a3b5b50b9db91febeae06f11484a15a92bde442" "aea30125ef2e48831f46695418677b9d676c3babf43959c8e978c0ad672a7329" "4a91a64af7ff1182ed04f7453bb5a4b0c3d82148d27db699df89a5f1d449e2a4" "1263771faf6967879c3ab8b577c6c31020222ac6d3bac31f331a74275385a452" "b3bcf1b12ef2a7606c7697d71b934ca0bdd495d52f901e73ce008c4c9825a3aa" "fd3b1531faea72f67620800a332e790f9f67b04412ef335c396971fc73bee24b" default)))
+ '(fci-rule-color "#005c08a30e0a")
+ '(fringe-mode 10 nil (fringe))
+ '(global-display-line-numbers-mode t)
+ '(global-visual-line-mode t)
+ '(global-whitespace-mode t)
+ '(linum-format " %6d ")
+ '(main-line-color1 "#222912")
+ '(main-line-color2 "#09150F")
+ '(package-selected-packages
+   (quote
+    (helm-phpunit phpunit auto-complete magit base16-theme afternoon-theme git-commit mandm-theme plantuml-mode ace-window exec-path-from-shell helm json-mode yafolding vue-mode centaur-tabs treemacs-icons-dired treemacs php-mode)))
+ '(powerline-color1 "#222912")
+ '(powerline-color2 "#09150F")
+ '(vc-annotate-background "#000000000000")
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#ebf122411a75")
+     (40 . "#EE3932")
+     (60 . "#FF7509")
+     (80 . "#e047d4d80000")
+     (100 . "#efa3e36c0000")
+     (120 . "#FFF200")
+     (140 . "#4355c7106ffd")
+     (160 . "#57CD7F")
+     (180 . "#62ccd08f8801")
+     (200 . "#6e99d41e9103")
+     (220 . "#7676d67e9704")
+     (240 . "#8632db3da306")
+     (260 . "#93E0E3")
+     (280 . "#00d857c4898e")
+     (300 . "#00f864c09de9")
+     (320 . "#014f8877d5e3")
+     (340 . "#0be6a625fe7f")
+     (360 . "#DDA0DD"))))
+ '(vc-annotate-very-old-color "#DDA0DD"))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+;; Set default font
+(set-face-attribute 'default nil
+                    :family "Agave"
+                    :height 65
+                    :weight 'normal
+                    :width 'normal)
