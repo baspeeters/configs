@@ -79,6 +79,7 @@
 
 
 ;; Journal mode
+(require 'org-journal)
 (setq org-journal-dir "~/org/journal/"
       org-journal-enable-agenda-integration t)
 
