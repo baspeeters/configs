@@ -75,13 +75,13 @@
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
-;(setq org-agenda-files '("~/org"))
+(setq org-agenda-files '("~/org"))
 
 
 ;; Journal mode
-(require 'org-journal)
 (setq org-journal-dir "~/org/journal/"
       org-journal-enable-agenda-integration t)
+(require 'org-journal)
 
 ;;;; gtags configuration
 ;(require 'ggtags)
