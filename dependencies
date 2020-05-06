@@ -1,0 +1,10 @@
+#!/bin/bash
+
+apt install \
+  elpa-use-package \
+  emacs \
+  ditaa \
+  graphviz \
+  plantuml
+
+mkdir -vp ~/org/journal
