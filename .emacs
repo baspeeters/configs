@@ -9,15 +9,25 @@
 ;; set package.el repositories
 (setq package-archives
 '(
-   ("org" . "https://orgmode.org/elpa/")
-   ("melpa" . "https://melpa.org/packages/")
+  ("org" . "https://orgmode.org/elpa/")
+  ("gnu-elpa" . "https://elpa.gnu.org/packages/")
+  ("melpa" . "https://melpa.org/packages/")
 ))
 
 ;; TODO Run this only when non-installed packages are found
 ;(unless package-archive-contents
 ;  (package-refresh-contents))
 
-(setq package-list '(use-package org-journal company diff-hl yasnippet centaur-tabs projectile tramp))
+(setq package-list '(use-package
+                      org-journal
+                      company diff-hl
+                      yasnippet
+                      centaur-tabs
+                      projectile
+                      tramp
+                      org-caldav
+                      oauth2
+                      magit))
 
 (dolist (package package-list)
   (unless (package-installed-p package)
@@ -48,7 +58,7 @@
  '(org-drill-new-count-color "#004488")
  '(package-selected-packages
    (quote
-    (org-pomodoro plantuml-mode company-php centaur-tabs yasnippet-snippets yasnippet phpunit php-mode ggtags typescript-mode treemacs diff-hl magit org-ref org-journal eziam-theme parchment-theme vue-mode base16-theme company)))
+    (oauth2 org-oauth2 org-oauth org-caldav org-pomodoro plantuml-mode company-php centaur-tabs yasnippet-snippets yasnippet phpunit php-mode ggtags typescript-mode treemacs diff-hl magit org-ref org-journal eziam-theme parchment-theme vue-mode base16-theme company)))
  '(pdf-view-midnight-colors (quote ("#ffffff" . "#000000")))
  '(tempo-insert-region t)
  '(tempo-interactive t)
