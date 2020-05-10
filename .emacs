@@ -23,24 +23,29 @@
   ("melpa" . "https://melpa.org/packages/")
 ))
 
-;; TODO Run this only when non-installed packages are found
-;(unless package-archive-contents
-;  (package-refresh-contents))
-
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 (setq package-list '(use-package
-                      org-journal
-                      company diff-hl
-                      yasnippet
                       centaur-tabs
+                      company
+                      diff-hl
+                      hyperbole
+                      magit
+                      oauth2
+                      org-caldav
+                      org-journal
                       projectile
                       tramp
-                      org-caldav
-                      oauth2
-                      magit))
+                      vdirel
+                      yasnippet))
 
+(require 'package)
+(setq package-enable-at-startup nil)
+(package-initialize)
 (dolist (package package-list)
   (unless (package-installed-p package)
-    (package-install package)))
+    (package-refresh-contents)
+    (package-install package))
+  (require 'package))
 
 
 (custom-set-variables
