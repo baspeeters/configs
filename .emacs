@@ -110,6 +110,12 @@
       org-journal-enable-agenda-integration t)
 (require 'org-journal)
 
+
+
+;; Contacts
+(setq vdirel-repository "~/org/contacts/default")
+
+
 ;;;; gtags configuration
 ;(require 'ggtags)
 ;(global-set-key "\M-t" 'gtags-find-tag)
