@@ -164,6 +164,9 @@
 ;;;; Org capture
 (setq org-default-notes-file "~/org/refile.org")
 (setq org-refile-targets '((org-agenda-files :maxlevel  . 6)))
+(setq org-refile-use-outline-path t)
+(setq org-refile-allow-creating-parent-nodes t)
+
 ;;;; Footnotes
 (setq org-footnote-define-inline +1)
 (setq org-footnote-auto-label 'random)
@@ -217,6 +220,9 @@
    (org-edit-special)
     (indent-region (point-min) (point-max))
     (org-edit-src-exit)))
+
+; Don't indent on promotion of trees
+(setq org-adapt-indentation nil)
 
 ;(run-at-time 1 10 'indent-org-block-automatically)
 
