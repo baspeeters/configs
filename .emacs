@@ -302,6 +302,7 @@
 
 ;; Calendar, agenda, journal
 ;(global-set-key (kbd "C-c c") 'calendar)
+(global-set-key (kbd "C-c C-s") 'org-journal-new-scheduled-entry)
 
 ;; Org-ref
 (global-set-key (kbd "C-c r") 'org-ref)
