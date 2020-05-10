@@ -89,8 +89,8 @@
 (setq-default indent-tabs-mode nil)
 
 ;; Highlight current line
-;(highlight-changes-mode 1)
-;(hl-line-mode 1)
+(highlight-changes-mode 1)
+(hl-line-mode 1)
 
 
 ;;;;Org mode configuration
