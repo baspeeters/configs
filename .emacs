@@ -342,13 +342,3 @@
     '(lambda () (interactive) (global-text-scale-adjust 1)))
 (global-set-key (kbd "M-S--")
     '(lambda () (interactive) (global-text-scale-adjust -1)))
-
-(custom-set-faces
- '(default ((t (
-      :family "Iosevka Fixed Extended"
-      :foundry "unknown"
-      :slant normal
-      :weight Regular
-      :height 140
-      :width normal))))
-)
