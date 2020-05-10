@@ -128,7 +128,7 @@
 (defun toggle-window-split ()
   (interactive)
   (if (= (count-windows) 2)
-      (let* ((this-win-buffer (window-buffer))
+      (let ((this-win-buffer (window-buffer))
          (next-win-buffer (window-buffer (next-window)))
          (this-win-edges (window-edges (selected-window)))
          (next-win-edges (window-edges (next-window)))
