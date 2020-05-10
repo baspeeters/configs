@@ -164,6 +164,11 @@
 ;;;; Org capture
 (setq org-default-notes-file "~/org/refile.org")
 (setq org-refile-targets '((org-agenda-files :maxlevel  . 6)))
+;;;; Footnotes
+(setq org-footnote-define-inline +1)
+(setq org-footnote-auto-label 'random)
+(setq org-footnote-auto-adjust nil)
+(global-set-key (kbd "C-c f") 'org-footnote-new)
 
 ;; I use C-c c to start capture mode
 (global-set-key (kbd "C-c c") 'org-capture)
