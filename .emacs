@@ -300,8 +300,8 @@
 (global-unset-key (kbd "ESC ESC ESC"))
 (global-set-key (kbd "ESC ESC ESC") 'keyboard-quit)
 
-;; Calendar
-(global-set-key (kbd "C-c c") 'calendar)
+;; Calendar, agenda, journal
+;(global-set-key (kbd "C-c c") 'calendar)
 
 ;; Org-ref
 (global-set-key (kbd "C-c r") 'org-ref)
