@@ -85,6 +85,9 @@
 ;; Enable transient mark mode
 (transient-mark-mode 1)
 
+;; Spaces instead of tabs
+(setq-default indent-tabs-mode nil)
+
 ;; Highlight current line
 ;(highlight-changes-mode 1)
 ;(hl-line-mode 1)
