@@ -334,6 +334,14 @@
     (global-text-scale-mode 1)
   )
 
+(set-face-attribute 'default nil :family "Iosevka Fixed Extended" :height 140)
+(set-face-attribute 'org-level-1 nil :height 1.6)
+(set-face-attribute 'org-level-2 nil :height 1.5)
+(set-face-attribute 'org-level-3 nil :height 1.4)
+(set-face-attribute 'org-level-4 nil :height 1.3)
+(set-face-attribute 'org-level-5 nil :height 1.2)
+(set-face-attribute 'org-level-5 nil :height 1.1)
+
 (global-set-key (kbd "M-S-0")
     '(lambda () (interactive)
        (global-text-scale-adjust (- text-scale-mode-amount))
@@ -342,3 +350,9 @@
     '(lambda () (interactive) (global-text-scale-adjust 1)))
 (global-set-key (kbd "M-S--")
     '(lambda () (interactive) (global-text-scale-adjust -1)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
