@@ -112,6 +112,8 @@
 (setq org-log-done t)
 (setq org-agenda-files '("~/org"))
 
+(add-hook 'org-mode-hook 'visual-line-mode)
+
 
 ;; Journal mode
 (setq org-journal-dir "~/org/journal/"
