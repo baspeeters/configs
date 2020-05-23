@@ -21,6 +21,7 @@
 (setq package-list '(use-package
                       centaur-tabs
                       company
+                      counsel
                       diff-hl
                       flycheck
                       flymake
@@ -72,6 +73,7 @@
  '(fci-rule-color "#111111")
  '(global-git-gutter-mode t)
  '(org-agenda-files (quote ("~/org/")))
+ '(ivy-mode t)
  '(org-drill-done-count-color "#663311")
  '(org-drill-failed-count-color "#880000")
  '(org-drill-mature-count-color "#005500")
@@ -271,6 +273,7 @@
 
 ;; Enable text wrapping
 (add-hook 'org-mode-hook 'toggle-word-wrap)
+(add-hook 'org-mode-hook 'ivy-mode)
 
 ;; Show result image after code block eval
 (define-key org-mode-map (kbd "C-c C-c")
@@ -364,7 +367,33 @@
 
 
 
-;; Key bindings
+
+;; Ivy / counsel
+(use-package ivy :demand
+      :config
+      (setq ivy-use-virtual-buffers t
+            ivy-count-format "%d/%d ")
+      (setq enable-recursive-minibuffers t)
+      ;; enable this if you want `swiper' to use it
+      ;; (setq search-default-mode #'char-fold-to-regexp)
+      (global-set-key (kbd "M-s") 'swiper-thing-at-point)
+      (global-set-key "\C-s" 'swiper)
+      (global-set-key (kbd "C-c C-r") 'ivy-resume)
+      (global-set-key (kbd "<f6>") 'ivy-resume)
+      (global-set-key (kbd "M-x") 'counsel-M-x)
+      (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+      (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+      (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+      (global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
+      (global-set-key (kbd "<f1> l") 'counsel-find-library)
+      (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+      (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+      (global-set-key (kbd "C-c g") 'counsel-git)
+      (global-set-key (kbd "C-c j") 'counsel-git-grep)
+      (global-set-key (kbd "C-c k") 'counsel-ag)
+      (global-set-key (kbd "C-x l") 'counsel-locate)
+      (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+      (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history))
 
 
 ;; Keyboard quit
