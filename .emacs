@@ -426,3 +426,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; Line numbers
+(global-set-key (kbd "C-c C-l g") 'goto-line) ;; Go to line number
+(global-set-key (kbd "C-c C-l n") 'linum-mode) ;; Enable line numbers
+(global-set-key (kbd "C-c C-l N") 'global-linum-mode) ;; Enable line numbers (globally)
+
