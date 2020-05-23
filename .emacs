@@ -114,6 +114,25 @@
 
 (add-hook 'org-mode-hook 'visual-line-mode)
 
+;; Source: https://lists.gnu.org/archive/html/emacs-orgmode/2012-09/msg01435.html
+(defun insert-link-with-title ()
+  "Insert org link where default description is set to html title."
+  (interactive)
+  (let* ((url (read-string "URL: "))
+         (title (get-html-title-from-url url)))
+    (org-insert-link nil url title)))
+
+(defun get-html-title-from-url (url)
+  "Return content in <title> tag."
+  (let (x1 x2 (download-buffer (url-retrieve-synchronously url)))
+    (save-excursion
+      (set-buffer download-buffer)
+      (beginning-of-buffer)
+      (setq x1 (search-forward "<title>"))
+      (search-forward "</title>")
+      (setq x2 (search-backward "<"))
+      (buffer-substring-no-properties x1 x2))))
+
 
 ;; Journal mode
 (setq org-journal-dir "~/org/journal/"
