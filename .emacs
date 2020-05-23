@@ -37,6 +37,7 @@
                       org-caldav
                       org-journal
                       projectile
+                      smex
                       tramp
 ;                      vdirel
                       yasnippet))
