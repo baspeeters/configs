@@ -298,7 +298,7 @@
 (define-minor-mode dev-mode
   "Developer Mode"
   :init-value nil
-  :lighter "Dev"
+  :lighter " dev "
   :group 'dev
   :keymap
   '(([C-g] . goto-line)
